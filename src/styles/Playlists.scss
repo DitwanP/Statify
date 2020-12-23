@@ -1,0 +1,25 @@
+// COLORS
+$white:#f0f0f0;
+$nav:#111110;
+$spotify-green:#1DB954;
+$spotify-black:#1c1c1c;
+
+// SCREEN SIZES
+$desktop:1200px;
+$laptop:1024px;
+$tablet:960px;
+$small-tablet:650px;
+$phone:480px;
+
+.playlists {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    overflow: hidden;
+}
