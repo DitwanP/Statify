@@ -23,18 +23,6 @@ const pageTransitions = {
     duration: 0.75,
 }
 
-// const container = { 
-//     start:{ 
-//         y: 40, opacity: 0 
-//     },
-//     end: {
-//         y: 0, opacity: 1 
-//     },
-//     rotate: {
-//         scale: 1.1, rotateX: 180
-//     },
-// }
-
 export default class TopArtists extends Component {
     render() {
         return (

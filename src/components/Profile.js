@@ -23,19 +23,6 @@ const pageTransitions = {
     duration: 0.75,
 }
 
-// const container = { 
-//     start:{ 
-//         y: 40, opacity: 0 
-//     },
-//     end: {
-//         y: 0, opacity: 1 
-//     },
-//     rotate: {
-//         scale: 1.1, rotateX: 180
-//     },
-// }
-
-
 export default class Profile extends Component {
     render() {
         return (
@@ -45,7 +32,26 @@ export default class Profile extends Component {
             animate="in"
             exit="outDown"
             transition={pageTransitions}>
-                <h1> Profile! </h1>
+                <div className="header-container">
+                    <div className="avatar"></div>
+                    <div className="account-name"> 
+                        <h1> just-shuttup </h1> 
+                    </div>
+                    <div className="account-stats">
+                        <div className="followers">
+                            <h2>X</h2>
+                            <h3>Followers</h3>
+                        </div>
+                        <div className="number-of-playlists">
+                            <h2>X</h2>
+                            <h3>Playists</h3>
+                        </div>
+                        <div className="following">
+                            <h2>X</h2>
+                            <h3>Following</h3>
+                        </div>
+                    </div>
+                </div>
             </motion.div>
         )
     }

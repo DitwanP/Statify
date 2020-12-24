@@ -1,23 +1,30 @@
-import React from 'react';
-import loadable from '@loadable/component'
-import { AnimatePresence, motion } from 'framer-motion';
-import { Route, Switch, NavLink, useLocation} from 'react-router-dom';
+import React, { Component } from 'react';
+import { motion } from 'framer-motion';
+import { NavLink} from 'react-router-dom';
 import { FaGithub, FaSpotify, FaUserAlt } from 'react-icons/fa';
 import { BsMusicNoteList, BsMusicNote } from 'react-icons/bs';
 import { GiMicrophone } from 'react-icons/gi';
+import { token } from './spotify';
+import LoggedInSite from './components/LoggedInSite';
+import LoginScreen from './components/LoginScreen';
 import './App.scss';
 
-const Profile = loadable(() => import('./components/Profile'));
-const TopSongs = loadable(() => import('./components/TopSongs'));
-const TopArtists = loadable(() => import('./components/TopArtists'));
-const Playlists = loadable(() => import('./components/Playlists'));
+class App extends Component  {
 
-function App() {
-    const location = useLocation();
+  state = {
+    token: '',
+  };
+
+  componentDidMount() {
+    this.setState({ token });
+  }
+
+  render() {
+    const { token } = this.state;
 
     return (
         <div className="App">
-            <motion.div className="sidenav-container"
+          <motion.div className="nav-container"
                 style={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1}}
                 transition={{ ease: "easeOut", duration: 0.25, delay: 1}}>
@@ -59,16 +66,10 @@ function App() {
                       </a>
                     </motion.ul>
             </motion.div>
-            <AnimatePresence exitBeforeEnter>
-                <Switch location={location} key={location.pathname}>
-                    <Route exact path="/" component={Profile} />
-                    <Route path="/songs" component={TopSongs} />
-                    <Route path="/artists" component={TopArtists} />
-                    <Route path="/playlists" component={Playlists} />
-                </Switch>
-            </AnimatePresence>
+          {token ? <LoggedInSite /> : <LoginScreen />}
         </div>
     );
+  }
 }
 
 export default App;
