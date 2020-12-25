@@ -5,6 +5,7 @@ $white:#f0f0f0;
 $light-grey:#bebebe;
 $nav:#111110;
 $spotify-green:#1DB954;
+$spotify-green-brighter:#20d35e;
 $spotify-black:#1c1c1c;
 
 // SCREEN SIZES
@@ -31,18 +32,28 @@ $phone:480px;
 
     .header-container {
         width: 70%;
-        height: 40%;
+        height: 45%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        @media screen and (max-width:2000px) {
+            margin-top: 3rem;
+            
+        }
     }
 
     .avatar {
-        height: 15rem;
-        width: 15rem;
+        height: 13rem;
+        width: 13rem;
+        border: 2px solid $white;
         border-radius: 50%;
-        background-color: $spotify-green;
+        background-color: transparent;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .account-name {
@@ -53,14 +64,24 @@ $phone:480px;
         align-items: center;
         margin-top: 1rem;
 
+        a {
+            text-decoration: none;
+            color: $white;
+            transition: all 0.25s cubic-bezier(0.3, 0, 0.4, 1) 0s;
+        }
+
+        a:hover {
+            color: $spotify-green-brighter;
+        }
+
         h1{
             font-size: 4rem;
-            font-weight: 800;
+            font-weight: 700;
         }
     }
 
     .account-stats {
-        height: 7rem;
+        height: 5rem;
         width: 35rem;
         display: flex;
         justify-content: space-between;
@@ -70,7 +91,7 @@ $phone:480px;
         h2 {
             color: $spotify-green;
             font-size: 1.6rem;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
@@ -104,5 +125,24 @@ $phone:480px;
             flex-direction: column;
             align-items: center;
         }
+    }
+
+    .logout-button {
+        background-color: transparent;
+        color: $white;
+        border: 1px solid $white;
+        border-radius: 30px;
+        margin-top: 30px;
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .logout-button:hover, .logout-button:focus {
+        background-color: $white;
+        color: $spotify-black;
     }
 }

@@ -4,7 +4,7 @@ import { NavLink} from 'react-router-dom';
 import { FaGithub, FaSpotify, FaUserAlt } from 'react-icons/fa';
 import { BsMusicNoteList, BsMusicNote } from 'react-icons/bs';
 import { GiMicrophone } from 'react-icons/gi';
-import { token } from './spotify';
+import { token, logout } from './spotify';
 import LoggedInSite from './components/LoggedInSite';
 import LoginScreen from './components/LoginScreen';
 import './App.scss';
@@ -35,7 +35,7 @@ class App extends Component  {
                         <FaSpotify/>
                     </motion.a>
                     <nav className="nav"> 
-                      <motion.div className="ham-nav-items"
+                      <motion.div className="nav-items"
                       style={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1}}
                       transition={{ ease: "easeOut", duration: 0.25, delay: 2 }}>
@@ -57,13 +57,11 @@ class App extends Component  {
                           </NavLink>
                       </motion.div>
                     </nav>
-                    <motion.ul className="socials"
+                    <motion.ul className="logout-container"
                     style={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1}}
                     transition={{ ease: "easeOut", duration: 0.25, delay: 2.5}}>
-                      <a className="github" href="https://github.com/DitwanP/Statify" target="_blank" rel="noopener noreferrer">
-                          <FaGithub/>
-                      </a>
+                      {token ? <button className="logout-button" onClick={logout}>Logout</button> : null}
                     </motion.ul>
             </motion.div>
           {token ? <LoggedInSite /> : <LoginScreen />}

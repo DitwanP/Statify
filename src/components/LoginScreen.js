@@ -3,26 +3,23 @@ import styled from 'styled-components/macro';
 import Main  from '../styles/Main';
 import theme  from '../styles/theme';
 import mixins from '../styles/mixins';
-const { colors, fontSizes } = theme;
+const { colors} = theme;
 
 const LOGIN_URI =
     process.env.NODE_ENV !== 'production'
         ? 'http://localhost:8888/login'
-        : 'https://spotify-profile.herokuapp.com/login';
+        : 'https://statify.herokuapp.com/login';
 
 const Login = styled(Main)`
     ${mixins.flexCenter};
     flex-direction: column;
     min-height: 100vh;
-    h1 {
-        font-size: ${fontSizes.xxl};
-    }
 `;
 
 const LoginButton = styled.a`
     display: inline-block;
-    background-color: ${colors.green};
-    color: ${colors.white};
+    background-color: #1DB954;
+    color: #1c1c1c;
     border-radius: 30px;
     padding: 17px 35px;
     margin: 20px 0 70px;
@@ -41,7 +38,6 @@ export default class LoginScreen extends Component{
     render(){
         return(
             <Login>
-                <h1>Spotify Profile</h1>
                 <LoginButton href={LOGIN_URI}>Log in to Spotify</LoginButton>
             </Login>
         )
