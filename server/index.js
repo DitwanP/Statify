@@ -66,8 +66,7 @@ if (cluster.isMaster) {
     .use(express.static(path.resolve(__dirname, '../build')))
     .use(cors())
     .use(cookieParser())
-    .use(
-      history({
+    .use(history({
         verbose: true,
         rewrites: [
           { from: /\/login/, to: '/login' },
@@ -83,6 +82,7 @@ if (cluster.isMaster) {
   });
 
   app.get('/login', function (req, res) {
+    console.log(req);
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
 
@@ -111,7 +111,8 @@ if (cluster.isMaster) {
 
     if (state === null || state !== storedState) {
       res.redirect(`/#${querystring.stringify({ error: 'state_mismatch' })}`);
-    } else {
+    } 
+    else {
       res.clearCookie(stateKey);
       const authOptions = {
         url: 'https://accounts.spotify.com/api/token',
@@ -149,17 +150,18 @@ if (cluster.isMaster) {
 
   app.get('/refresh_token', function (req, res) {
     // requesting access token from refresh token
+    console.warn(req.query.refresh_token);
     const refresh_token = req.query.refresh_token;
     const authOptions = {
       url: 'https://accounts.spotify.com/api/token',
+      form: {
+        grant_type: 'refresh_token',
+        refresh_token,
+      },
       headers: {
         Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
           'base64',
         )}`,
-      },
-      form: {
-        grant_type: 'refresh_token',
-        refresh_token,
       },
       json: true,
     };

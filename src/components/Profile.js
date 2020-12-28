@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Profile.scss';
-import { getUserInfo, logout } from '../spotify';
+import { getUserInfo } from '../spotify';
 import { catchErrors } from '../utils';
 import Loader from './Loader';
 
@@ -49,7 +49,7 @@ class Profile extends Component {
         const { user, followedArtists, playlists, topArtists, topTracks } = this.state;
         const totalPlaylists = playlists ? playlists.total : 0;
 
-        {playlists ? console.log(this.state.playlists) : console.log('user does not have any data at the moment!')};
+        {topTracks ? console.log(this.state.topTracks) : console.log('user does not have any data at the moment!')};
 
         return (
             <React.Fragment>
@@ -89,7 +89,35 @@ class Profile extends Component {
                                     <h3>Following</h3>
                                 </div>
                             </div>
-                            <button className="logout-button" onClick={logout}>Logout</button>
+                        </div>
+                        <div className="body-container">
+                            <div className="top-songs">
+                                <h1>Top songs of all time </h1>
+                                <ul className="songs">
+                                    {topTracks.items.length > 0 ? (
+                                        <li> 
+                                            <img className="album-cover" src={topTracks.items[0].album.images[2].url} alt="album-cover"/> 
+                                            <div className="title-and-artist">
+                                                <div className="song">
+                                                    <a href={topTracks.items[0].external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                                                        <h2 className="song-title">{topTracks.items[0].name}</h2>
+                                                    </a>
+                                                </div>
+                                                <div className="artists">
+                                                    {topTracks.items[0].artists.map((data, index) => (
+                                                        <h3 key={index}> {data.name} </h3>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ) : (
+                                        <h2> no top songs</h2>
+                                    )}
+                                </ul>     
+                            </div>
+                            <div className="top-artists">
+                                <h1>Top artist of all time </h1>
+                            </div>
                         </div>
                     </motion.div>
                 ) : (

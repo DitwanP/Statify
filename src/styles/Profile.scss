@@ -27,11 +27,12 @@ $phone:480px;
     flex-direction: column;
     align-items: center;
     color: $white;
-    overflow: hidden;
+    overflow: scroll;
+    overflow-x: hidden;
     font-family: 'Barlow', sans-serif;
 
     .header-container {
-        width: 70%;
+        width: 80%;
         height: 45%;
         display: flex;
         flex-direction: column;
@@ -41,6 +42,108 @@ $phone:480px;
         @media screen and (max-width:2000px) {
             margin-top: 3rem;
             
+        }
+    }
+
+    .body-container {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .top-songs {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+
+            h1 {
+                font-size: 22px;
+                font-weight: bold;
+            }
+
+            .songs {
+                height: 40%;
+                width: 100%;
+                list-style: none;
+                margin-top: 1rem;
+
+                li {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    .album-cover {
+                        padding: 1rem;
+                    }
+
+                    .song-and-album {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        a {
+                            color: $white;
+                            text-decoration: none;
+                        }
+
+                        .song-title {
+                            font-size: 1.8rem;
+                            font-weight: 500;
+                            margin-right: 0.5rem;
+                        }
+
+                        .album-title {
+                            font-size: 1.8rem;
+                            font-weight: 500;
+                        }
+
+                        .album-title::before {
+                            content: '- ';
+                        }
+                    }
+
+                    .artists {
+                        display: flex;
+
+                        h3{
+                            font-size: 1.4rem;
+                            font-weight: 400;
+                            margin-left: 0.5rem;
+                            color: $light-grey;
+                        }
+
+                        h3:nth-child(1) {
+                            margin-left: 0;
+                        }
+
+                        h3::after {
+                            content: ',';
+                        }
+
+                        h3:last-child::after {
+                            content: '';
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .top-artists {
+            width: 50%;
+            height: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h1 {
+                font-size: 22px;
+                font-weight: bold;
+            }
         }
     }
 

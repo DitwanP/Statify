@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { motion } from 'framer-motion';
 import { NavLink} from 'react-router-dom';
-import { FaGithub, FaSpotify, FaUserAlt } from 'react-icons/fa';
+import { FaSpotify, FaUserAlt } from 'react-icons/fa';
 import { BsMusicNoteList, BsMusicNote } from 'react-icons/bs';
 import { GiMicrophone } from 'react-icons/gi';
 import { token, logout } from './spotify';
