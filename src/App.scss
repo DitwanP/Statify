@@ -5,6 +5,8 @@ $white:#b4b4b4;
 $white-active:#e6e6e6;
 $nav:#070707;
 $spotify-green:#1DB954;
+$spotify-green-dark:#15803a;
+$spotify-green-brighter:#20d35e;
 $spotify-black:#1c1c1c;
 
 // SCREEN SIZES
@@ -23,6 +25,26 @@ html{
     padding: 0;
     box-sizing: border-box;
     text-rendering: optimizeLegibility;
+
+    scrollbar-width: thin;          /* "auto" or "thin" */
+    scrollbar-color: $spotify-green rgba(0, 0, 0, 0.829);   /* scroll thumb and track */
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      width: 11px;
+      background: rgba(0, 0, 0, 0.829);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: $spotify-green;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: $spotify-green-dark;
+    }
 }
 
 body {

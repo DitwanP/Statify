@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { motion } from 'framer-motion';
 import '../styles/Profile.scss';
-import { getUserInfo } from '../spotify';
+import { getUserInfo, getTopSongsAndArtists} from '../spotify';
 import { catchErrors } from '../utils';
 import Loader from './Loader';
+
+import styled from 'styled-components/macro';
 
 const pageVariants = { 
     in:{ 
@@ -26,13 +28,38 @@ const pageTransitions = {
     duration: 0.75,
 }
 
+const RangeButton = styled.button`
+    background-color: transparent;
+    color: ${props => (props.isActive ? '#f0f0f0' : '#bebebe')};
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0rem 0.5rem;
+    outline: none;
+    border: none;
+
+    span {
+        padding-bottom: 2px;
+        border-bottom: 1px solid ${props => (props.isActive ? '#20d35e' : `transparent`)};
+        line-height: 1.5;
+        white-space: nowrap;
+    }
+`;
+
 class Profile extends Component {
     state = {
         user: null,
         followedArtists: null,
         playlists: null,
-        topArtists: null,
-        topTracks: null,
+        artistsLong: null, 
+        artistsMedium: null, 
+        artistsShort: null, 
+        songsLong: null, 
+        songsMedium: null, 
+        songsShort: null,
+        topTracksData: null,
+        topArtistsData: null,
+        activeRange: 'long',
+        artistsActiveRange: 'artistsLong',
     };
 
     componentDidMount() {
@@ -40,16 +67,68 @@ class Profile extends Component {
     }
 
     async getData() {
-        const { user, followedArtists, playlists, topArtists, topTracks } = await getUserInfo();
-        this.setState({ user, followedArtists, playlists, topArtists, topTracks });
+        const { user, followedArtists, playlists } = await getUserInfo();
+        const { artistsLong, artistsMedium, artistsShort, songsLong, songsMedium, songsShort } = await getTopSongsAndArtists();
+        this.setState({ user, 
+            followedArtists, 
+            playlists, 
+            artistsLong, 
+            artistsMedium, 
+            artistsShort, 
+            songsLong, 
+            songsMedium, 
+            songsShort, 
+            topTracksData: songsLong,
+            topArtistsData: artistsLong});
     }
+
+    async changeRange(range) {
+        if(range === 'long'){
+            const data = this.state.songsLong;
+            this.setState({ topTracksData: data, activeRange: range });
+        }
+        else if(range === 'medium'){
+            const data = this.state.songsMedium;
+            this.setState({ topTracksData: data, activeRange: range });
+        }
+        else if(range === 'short'){
+            const data = this.state.songsShort;
+            this.setState({ topTracksData: data, activeRange: range });
+        }
+    }
+
+    async changeRangeArtists(range) {
+        if(range === 'artistsLong'){
+            const data = this.state.songsLong;
+            this.setState({ topArtistsData: data, activeRange: range });
+        }
+        else if(range === 'artistsMedium'){
+            const data = this.state.songsMedium;
+            this.setState({ topArtistsData: data, activeRange: range });
+        }
+        else if(range === 'artistsLongShort'){
+            const data = this.state.songsShort;
+            this.setState({ topArtistsData: data, activeRange: range });
+        }
+    }
+
+    setActiveRange = range => catchErrors(this.changeRange(range));
+    setActiveRangeArtists = range => catchErrors(this.changeRangeArtists(range));
 
     render() {
 
-        const { user, followedArtists, playlists, topArtists, topTracks } = this.state;
+        const { user, 
+            followedArtists, 
+            playlists, 
+            topArtistsData, 
+            topTracksData,  
+            activeRange,
+            artistsActiveRange} = this.state;
+            
         const totalPlaylists = playlists ? playlists.total : 0;
 
-        {topTracks ? console.log(this.state.topTracks) : console.log('user does not have any data at the moment!')};
+        {topTracksData ? (console.log(this.state.topTracksData)) : 
+            (console.log('User does not have any top song data at the moment!'))};
 
         return (
             <React.Fragment>
@@ -81,7 +160,7 @@ class Profile extends Component {
                                     <h3>Followers</h3>
                                 </div>
                                 <div className="number-of-playlists">
-                                    <h2>{playlists.total}</h2>
+                                    <h2>{totalPlaylists}</h2>
                                     <h3>Playists</h3>
                                 </div>
                                 <div className="following">
@@ -92,31 +171,88 @@ class Profile extends Component {
                         </div>
                         <div className="body-container">
                             <div className="top-songs">
-                                <h1>Top songs of all time </h1>
+                                <div className="header-for-top-lists">
+                                    <h1>Top Songs</h1>
+                                    <div className="ranges">
+                                        <RangeButton className="range-button-top-songs"
+                                        isActive={activeRange === 'long'}
+                                        onClick={() => this.setActiveRange('long')}>
+                                            <span>All Time</span>
+                                        </RangeButton>
+                                        <RangeButton className="range-button-top-songs"
+                                        isActive={activeRange === 'medium'}
+                                        onClick={() => this.setActiveRange('medium')}>
+                                            <span>Last 6 Months</span>
+                                        </RangeButton>
+                                        <RangeButton className="range-button-top-songs"
+                                        isActive={activeRange === 'short'}
+                                        onClick={() => this.setActiveRange('short')}>
+                                            <span>Last Month</span>
+                                        </RangeButton>
+                                    </div>
+                                </div>
                                 <ul className="songs">
-                                    {topTracks.items.length > 0 ? (
-                                        <li> 
-                                            <img className="album-cover" src={topTracks.items[0].album.images[2].url} alt="album-cover"/> 
+                                    {topTracksData ? (
+                                        topTracksData.items.map((song, index) => 
+                                        <li key={index}> 
+                                            <img className="album-cover" src={song.album.images[2].url} alt="album-cover"/> 
                                             <div className="title-and-artist">
                                                 <div className="song">
-                                                    <a href={topTracks.items[0].external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                                                        <h2 className="song-title">{topTracks.items[0].name}</h2>
+                                                    <a href={song.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                                                        <h2 className="song-title">{song.name}</h2>
                                                     </a>
                                                 </div>
                                                 <div className="artists">
-                                                    {topTracks.items[0].artists.map((data, index) => (
-                                                        <h3 key={index}> {data.name} </h3>
+                                                    {song.artists.map((artist, index) => (
+                                                        <h3 key={index}> {artist.name} </h3>
                                                     ))}
                                                 </div>
                                             </div>
                                         </li>
-                                    ) : (
-                                        <h2> no top songs</h2>
+                                    )) : (
+                                        <Loader />
                                     )}
                                 </ul>     
                             </div>
                             <div className="top-artists">
-                                <h1>Top artist of all time </h1>
+                                <div className="header-for-top-lists">
+                                    <h1>Top Artists</h1>
+                                    <div className="ranges">
+                                        <RangeButton className="range-button-top-artists"
+                                        isActive={artistsActiveRange === 'artistsLong'}
+                                        onClick={() => this.setActiveRangeArtists('artistsLong')}>
+                                            <span>All Time</span>
+                                        </RangeButton>
+                                        <RangeButton className="range-button-top-artists"
+                                        isActive={artistsActiveRange === 'artistsMedium'}
+                                        onClick={() => this.setActiveRangeArtists('artistsMedium')}>
+                                            <span>Last 6 Months</span>
+                                        </RangeButton>
+                                        <RangeButton className="range-button-top-artists"
+                                        isActive={artistsActiveRange === 'artistsShort'}
+                                        onClick={() => this.setActiveRangeArtists('artistsShort')}>
+                                            <span>Last Month</span>
+                                        </RangeButton>
+                                    </div>
+                                </div>
+                                <ul className="artists">
+                                    {topArtistsData ? (
+                                        topArtistsData.items.map((artist, index) => 
+                                        <li key={index}> 
+                                            <div className="avatar-and-name">
+                                                <img className="artist-avatar" src={artist.images[2].url} alt="artist-avatar"/> 
+                                                <a className="artist-name" href={artist.href} noopener target="_blank" rel="noopener noreferrer">
+                                                    <h1> {artist.name} </h1>
+                                                </a>
+                                            </div>
+                                            <div className="popularity">
+                                                <h1>Popularity - <span>{artist.popularity}</span></h1>
+                                            </div>
+                                        </li>
+                                    )) : (
+                                        <Loader />
+                                    )}
+                                </ul>
                             </div>
                         </div>
                     </motion.div>
