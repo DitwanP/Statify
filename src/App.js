@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { motion } from 'framer-motion';
 import { NavLink} from 'react-router-dom';
 import { FaSpotify, FaUserAlt } from 'react-icons/fa';
-import { BsMusicNoteList, BsMusicNote } from 'react-icons/bs';
-import { GiMicrophone } from 'react-icons/gi';
+import { BsMusicNoteList } from 'react-icons/bs';
 import { token, logout } from './spotify';
 import LoggedInSite from './components/LoggedInSite';
 import LoginScreen from './components/LoginScreen';
@@ -42,14 +41,6 @@ class App extends Component  {
                         <NavLink to="/" exact activeClassName="active-link" className="nav-links">
                           <FaUserAlt/>
                           <h3 className="link-name">Profile</h3>
-                        </NavLink>
-                        <NavLink to="/songs" exact activeClassName="active-link" className="nav-links">
-                          <BsMusicNote/>
-                          <h3 className="link-name">Top Songs</h3>
-                        </NavLink>
-                        <NavLink to="/artists" exact activeClassName="active-link" className="nav-links">
-                          <GiMicrophone/>
-                          <h3 className="link-name">Top Artists</h3>
                         </NavLink>
                         <NavLink to="/playlists" exact activeClassName="active-link" className="nav-links">
                             <BsMusicNoteList/>

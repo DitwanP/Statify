@@ -87,10 +87,6 @@ body {
       scale: 1.05;
     }
 
-    @media screen and (max-width:$tablet) {
-      display: none;
-    }
-
 }
 
 .nav {
@@ -105,7 +101,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
   } 
 
@@ -118,7 +114,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
     text-decoration: none;
     transition: all 0.25s cubic-bezier(0.3, 0, 0.4, 1) 0s;
 
@@ -155,21 +150,24 @@ body {
     .nav-items { 
 
       a, .nav-links {
-        font-size: 1.1rem;
+        width: 45%;
+        font-size: 1rem;
         color: $white;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-decoration: none;
+        background-color: transparent;
 
         svg {
-          height: 1.5rem;
-          width: 1.5rem;
+          height: 1.3rem;
+          width: 1.3rem;
         }
       }
 
       a:hover, .nav-links:hover {
+        background-color: transparent;
         color: $white-active;
         cursor: pointer;
       }
@@ -206,6 +204,20 @@ body {
     .logout-button:hover, .logout-button:focus {
       background-color: $white;
       color: $spotify-black;
+    }
+
+    @media screen and (max-width:1000px){
+      width: 70px;
+      justify-content: center;
+
+      .logout-button{
+        height: 45px;
+        width: 45px;
+        font-size: 0.65rem;
+        border: 1px solid $white;
+        border-radius: 50%;
+        padding: 5px 5px;
+      }
     }
     
 }

@@ -127,8 +127,8 @@ class Profile extends Component {
             
         const totalPlaylists = playlists ? playlists.total : 0;
 
-        {topTracksData ? (console.log(this.state.topTracksData)) : 
-            (console.log('User does not have any top song data at the moment!'))};
+        // {topTracksData ? (console.log(this.state.topTracksData)) : 
+        //     (console.log('User does not have any top song data at the moment!'))};
 
         return (
             <React.Fragment>
@@ -170,6 +170,18 @@ class Profile extends Component {
                             </div>
                         </div>
                         <div className="body-container">
+                            <div className="choice-container">
+                                <div className="top-songs-button">
+                                    <button>
+                                        <h1>Tops Songs</h1>
+                                    </button>
+                                </div>
+                                <div className="top-artist-button">
+                                    <button>
+                                        <h1>Tops Artists</h1>
+                                    </button>
+                                </div>
+                            </div>
                             <div className="top-songs">
                                 <div className="header-for-top-lists">
                                     <h1>Top Songs</h1>
