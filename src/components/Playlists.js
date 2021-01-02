@@ -33,7 +33,12 @@ export default class Playlists extends Component {
             animate="in"
             exit="outDown"
             transition={pageTransitions}>
-                <h1> Playlists! </h1>
+                <div className="header-container">
+                    <h1>Your Playlists</h1>
+                </div>
+                <div className="users-playlists-container">
+
+                </div>
             </motion.div>
         )
     }
