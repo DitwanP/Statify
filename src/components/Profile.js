@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { motion } from 'framer-motion';
-import '../styles/Profile.scss';
-import { getUserInfo, getTopSongsAndArtists} from '../spotify';
-import { catchErrors } from '../utils';
 import Loader from './Loader';
+import { motion } from 'framer-motion';
+import { catchErrors } from '../utils';
+import { getUserInfo, getTopSongsAndArtists} from '../spotify';
 
 import styled from 'styled-components/macro';
+import '../styles/Profile.scss';
 
 const pageVariants = { 
     in:{ 
@@ -30,7 +30,7 @@ const pageTransitions = {
 
 const RangeButton = styled.button`
     background-color: transparent;
-    color: ${props => (props.isActive ? '#f0f0f0' : '#bebebe')};
+    color: ${props => (props.isActive ? '#ffffff' : '#999999')};
     font-size: 18px;
     font-weight: 500;
     margin: 0rem 0.5rem;
@@ -46,6 +46,7 @@ const RangeButton = styled.button`
 `;
 
 class Profile extends Component {
+
     state = {
         user: null,
         followedArtists: null,
@@ -59,7 +60,9 @@ class Profile extends Component {
         topTracksData: null,
         topArtistsData: null,
         activeRange: 'long',
-        artistsActiveRange: 'artistsLong',
+        artistsActiveRange: 'artistsMedium',
+        makeSongsVisible: true,
+        makeArtistsVisible: false,
     };
 
     componentDidMount() {
@@ -82,6 +85,14 @@ class Profile extends Component {
             topArtistsData: artistsLong});
     }
 
+    async toSongsTab() {
+        this.setState({ makeSongsVisible: true, makeArtistsVisible: false })
+    }
+
+    async toArtistsTab() {
+        this.setState({ makeSongsVisible: false, makeArtistsVisible: true })
+    }
+
     async changeRange(range) {
         if(range === 'long'){
             const data = this.state.songsLong;
@@ -99,19 +110,21 @@ class Profile extends Component {
 
     async changeRangeArtists(range) {
         if(range === 'artistsLong'){
-            const data = this.state.songsLong;
-            this.setState({ topArtistsData: data, activeRange: range });
+            const data = this.state.artistsLong;
+            this.setState({ topArtistsData: data, artistsActiveRange: range });
         }
         else if(range === 'artistsMedium'){
-            const data = this.state.songsMedium;
-            this.setState({ topArtistsData: data, activeRange: range });
+            const data = this.state.artistsMedium;
+            this.setState({ topArtistsData: data, artistsActiveRange: range });
         }
-        else if(range === 'artistsLongShort'){
-            const data = this.state.songsShort;
-            this.setState({ topArtistsData: data, activeRange: range });
+        else if(range === 'artistsShort'){
+            const data = this.state.artistsShort;
+            this.setState({ topArtistsData: data, artistsActiveRange: range });
         }
     }
 
+    viewSongsTab = () => catchErrors(this.toSongsTab());
+    viewArtistsTab = () => catchErrors(this.toArtistsTab());
     setActiveRange = range => catchErrors(this.changeRange(range));
     setActiveRangeArtists = range => catchErrors(this.changeRangeArtists(range));
 
@@ -123,12 +136,17 @@ class Profile extends Component {
             topArtistsData, 
             topTracksData,  
             activeRange,
-            artistsActiveRange} = this.state;
+            artistsActiveRange,
+            makeSongsVisible,
+            makeArtistsVisible} = this.state;
             
         const totalPlaylists = playlists ? playlists.total : 0;
 
-        // {topTracksData ? (console.log(this.state.topTracksData)) : 
-        //     (console.log('User does not have any top song data at the moment!'))};
+        // const tabForSongsVisibilityTest = makeSongsVisible ? 'show' : 'hide';
+        // console.log('What to do with top songs div?', tabForSongsVisibilityTest);
+        
+        // const tabForArtistsVisibilityTest = makeArtistsVisible ? 'show' : 'hide';
+        // console.log('What to do with top artists div?', tabForArtistsVisibilityTest);
 
         return (
             <React.Fragment>
@@ -172,17 +190,22 @@ class Profile extends Component {
                         <div className="body-container">
                             <div className="choice-container">
                                 <div className="top-songs-button">
-                                    <button>
-                                        <h1>Tops Songs</h1>
-                                    </button>
+                                    <RangeButton className="top-songs-tab-button"
+                                    isActive={makeSongsVisible}
+                                    onClick={() => this.viewSongsTab('songs')}>
+                                        <span>Top Songs</span>
+                                    </RangeButton>
                                 </div>
                                 <div className="top-artist-button">
-                                    <button>
-                                        <h1>Tops Artists</h1>
-                                    </button>
+                                    <RangeButton className="top-artists-tab-button"
+                                    isActive={makeArtistsVisible}
+                                    onClick={() => this.viewArtistsTab('artists')}>
+                                        <span>Top Artists</span>
+                                    </RangeButton>
                                 </div>
                             </div>
-                            <div className="top-songs">
+                            <div className="top-songs" 
+                            value={makeSongsVisible ? 'show' : 'hide'}>
                                 <div className="header-for-top-lists">
                                     <h1>Top Songs</h1>
                                     <div className="ranges">
@@ -226,7 +249,8 @@ class Profile extends Component {
                                     )}
                                 </ul>     
                             </div>
-                            <div className="top-artists">
+                            <div className="top-artists"
+                            value={makeArtistsVisible ? 'show' : 'hide'}>
                                 <div className="header-for-top-lists">
                                     <h1>Top Artists</h1>
                                     <div className="ranges">
@@ -253,7 +277,7 @@ class Profile extends Component {
                                         <li key={index}> 
                                             <div className="avatar-and-name">
                                                 <img className="artist-avatar" src={artist.images[2].url} alt="artist-avatar"/> 
-                                                <a className="artist-name" href={artist.href} noopener target="_blank" rel="noopener noreferrer">
+                                                <a className="artist-name" href={artist.href} target="_blank" rel="noopener noreferrer">
                                                     <h1> {artist.name} </h1>
                                                 </a>
                                             </div>
