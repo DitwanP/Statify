@@ -24,7 +24,7 @@ $phone:480px;
 }
 
 .playlists {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     max-width: 1400px;
     padding: 70px;
@@ -102,8 +102,8 @@ $phone:480px;
             }
 
             h2 {
-                color: $spotify-green-dark;
-                font-size: 1.3rem;
+                color: $spotify-green;
+                font-size: 1.2rem;
                 font-weight: 600;
             }
         }
