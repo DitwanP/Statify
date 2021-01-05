@@ -7,16 +7,13 @@ import Loader from './Loader';
 
 const pageVariants = { 
     in:{ 
-        scale: [0.95, 0.95, 0.95, 1],
-        x: ["100vw", "100vw", "0vw", "0vw"],
+        y: ["100vh", "100vh", "0vh", "0vh"],
     },
     notIn: {
-        scale: 0.95,
-        x: "100vw",
+        y: "100vh",
     },
     outDown: {
-        scale: [1, 0.95, 0.95],
-        y: [0, 0, 1000],
+        y: ["0vh", "0vh", "100vh"],
     }
 }
 
@@ -49,13 +46,13 @@ export default class Playlists extends Component {
         return (
             <React.Fragment>
                 { playlists ? (
-                    <div>
-                        <motion.div className="playlists"
-                        variants={pageVariants}
-                        initial="notIn"
-                        animate="in"
-                        exit="outDown"
-                        transition={pageTransitions}>
+                    <motion.div className="background"
+                    variants={pageVariants}
+                    initial="notIn"
+                    animate="in"
+                    exit="outDown"
+                    transition={pageTransitions}>
+                        <div className="playlists">
                             <div className="header-container">
                                 <h1>Your Playlists</h1>
                             </div>
@@ -72,8 +69,8 @@ export default class Playlists extends Component {
                                     </div>
                                 )}
                             </div>
-                        </motion.div> 
-                    </div>
+                        </div> 
+                    </motion.div>
                 ) : (
                     <Loader />
                 )}

@@ -9,16 +9,13 @@ import '../styles/Profile.scss';
 
 const pageVariants = { 
     in:{ 
-        scale: [0.95, 0.95, 0.95, 1],
-        x: ["100vw", "100vw", "0vw", "0vw"],
+        y: ["100vh", "100vh", "0vh", "0vh"],
     },
     notIn: {
-        scale: 0.95,
-        x: "100vw",
+        y: "100vh",
     },
     outDown: {
-        scale: [1, 0.95, 0.95],
-        y: [0, 0, 1000],
+        y: ["0vh", "0vh", "100vh"],
     }
 }
 

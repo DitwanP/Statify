@@ -17,6 +17,12 @@ $tablet:960px;
 $small-tablet:670px;
 $phone:480px;
 
+.background {
+    height: 100%;
+    width: 100%;
+    background-color: $spotify-black;
+}
+
 .playlists {
     height: 100vh;
     width: 100%;
@@ -167,7 +173,7 @@ $phone:480px;
         }
 
         .users-playlists-container {
-            margin-top: 3rem;
+            margin-top: 5rem;
         }
     }
 
