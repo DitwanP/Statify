@@ -5,9 +5,8 @@ import { Route, Switch, useLocation} from 'react-router-dom';
 
 const Login = loadable(() => import('./LoginScreen'));
 const Profile = loadable(() => import('./Profile'));
-const TopSongs = loadable(() => import('./TopSongs'));
-const TopArtists = loadable(() => import('./TopArtists'));
 const Playlists = loadable(() => import('./Playlists'));
+const RecentlyPlayed = loadable(() => import('./RecentlyPlayed'));
 
 function LoggedInSite() {
     const location = useLocation();
@@ -17,9 +16,8 @@ function LoggedInSite() {
         <Switch location={location} key={location.pathname}>
             <Route exact path="/" component={Profile} />
             <Route path="/login" component={Login} />
-            <Route path="/songs" component={TopSongs} />
-            <Route path="/artists" component={TopArtists} />
             <Route path="/playlists" component={Playlists} />
+            <Route path="/recently-played" component={RecentlyPlayed} />
         </Switch>
         </AnimatePresence>
     )

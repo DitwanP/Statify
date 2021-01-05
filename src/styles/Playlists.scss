@@ -39,7 +39,7 @@ $phone:480px;
 
         h1 {
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 500;
         }
     }
 
@@ -161,6 +161,14 @@ $phone:480px;
 
     @media screen and (max-width:$small-tablet) {
         max-width: 500px;
+        
+        .header-container {
+            display: none;
+        }
+
+        .users-playlists-container {
+            margin-top: 3rem;
+        }
     }
 
     @media screen and (max-width:$phone) {

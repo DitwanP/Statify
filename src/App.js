@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { motion } from 'framer-motion';
 import { NavLink} from 'react-router-dom';
 import { FaSpotify, FaUserAlt } from 'react-icons/fa';
-import { BsMusicNoteList } from 'react-icons/bs';
+import { BsMusicNoteList, BsArrowCounterclockwise } from 'react-icons/bs';
 import { token, logout } from './spotify';
 import LoggedInSite from './components/LoggedInSite';
 import LoginScreen from './components/LoginScreen';
@@ -45,7 +45,11 @@ class App extends Component  {
                         <NavLink to="/playlists" exact activeClassName="active-link" className="nav-links">
                             <BsMusicNoteList/>
                             <h3 className="link-name">Playlists</h3>
-                          </NavLink>
+                        </NavLink>
+                        <NavLink to="/recently-played" exact activeClassName="active-link" className="nav-links">
+                            <BsArrowCounterclockwise/>
+                            <h3 className="link-name">Recent</h3>
+                        </NavLink>
                       </motion.div>
                     </nav>
                     <motion.ul className="logout-container"

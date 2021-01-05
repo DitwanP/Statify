@@ -61,31 +61,36 @@ body {
   left: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  z-index: 99;
+  justify-content: space-evenly;
   background-color: $nav;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
   font-family: 'Barlow', sans-serif;
+  z-index: 99;
 }
 
 .logo {
     display: flex;
     justify-content: left;
     align-items: center;
-    height: 100%;
-    width: 110px;
 
     svg {
       color: $spotify-green;
-      height: 4rem;
-      width: 4rem;
-      margin-left: 1rem;
+      height: 45px;
+      width: 45px;
       transition: all 0.25s cubic-bezier(0.3, 0, 0.4, 1) 0s;
     }
 
     svg:hover {
       color: #21d460;
       scale: 1.05;
+    }
+
+    @media screen and (max-width:1000px){
+      svg {
+        height: 40px;
+        width: 40px;
+        margin-left: 1rem;
+      }
     }
 
 }
@@ -146,7 +151,7 @@ body {
   }
 
   @media screen and (max-width:$tablet) {
-    width: 100%;
+    width: 80%;
 
     .nav-items { 
 
@@ -162,8 +167,8 @@ body {
         background-color: transparent;
 
         svg {
-          height: 1.3rem;
-          width: 1.3rem;
+          height: 1.5rem;
+          width: 1.5rem;
         }
       }
 
@@ -182,10 +187,8 @@ body {
 
 .logout-container {
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 110px;
 
     .logout-button {
       background-color: transparent;
@@ -198,7 +201,6 @@ body {
       letter-spacing: 1px;
       text-transform: uppercase;
       text-align: center;
-      margin-right: 1rem;
       transition: all 0.25s cubic-bezier(0.3, 0, 0.4, 1) 0s;
     }
     
@@ -208,16 +210,16 @@ body {
     }
 
     @media screen and (max-width:1000px){
-      width: 70px;
       justify-content: center;
 
       .logout-button{
-        height: 45px;
-        width: 45px;
+        height: 40px;
+        width: 40px;
         font-size: 0.65rem;
         border: 1px solid $light-grey;
         border-radius: 50%;
-        padding: 5px 5px;
+        padding: 0px 3px;
+        margin-right: 1rem;
       }
     }
     
