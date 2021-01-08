@@ -63,9 +63,13 @@ $phone:480px;
         margin-top: 30px;
 
         .song-item {
+            width: 100%;
             display: flex;
             flex-direction: row;
             margin-bottom: 2rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
 
             .song-album-art {
                 margin-right: 2rem;
@@ -84,6 +88,7 @@ $phone:480px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                overflow: hidden;
 
                 .song-name {
                     text-decoration: none;
@@ -138,6 +143,10 @@ $phone:480px;
                     }
 
                     .album {
+                        display: flex;
+                        padding-right: 1px;
+                        white-space: nowrap;
+
                         span {
                             margin-right: 0.5rem;
                             font-size: 1.2rem;
@@ -147,6 +156,9 @@ $phone:480px;
                         h2 {
                             font-size: 1.4rem;
                             font-weight: 400;
+                            overflow: hidden;
+                            padding-right: 1px;
+                            text-overflow: ellipsis;
 
                             a {
                                 text-decoration: none;
@@ -232,6 +244,9 @@ $phone:480px;
                         }
 
                         .album {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+
                             span {
                                 margin-right: 0.5rem;
                             }
