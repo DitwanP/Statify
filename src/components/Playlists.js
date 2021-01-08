@@ -41,7 +41,6 @@ export default class Playlists extends Component {
 
     render() {
         const { playlists } = this.state;
-        console.log(playlists);
 
         return (
             <React.Fragment>

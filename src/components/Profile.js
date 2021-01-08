@@ -27,7 +27,7 @@ const pageTransitions = {
 
 const RangeButton = styled.button`
     background-color: transparent;
-    color: ${props => (props.isActive ? '#ffffff' : '#999999')};
+    color: ${props => (props.isActive ? '#f0f0f0' : '#999999')};
     font-size: 18px;
     font-weight: 500;
     margin: 0rem 0.5rem;
@@ -36,7 +36,7 @@ const RangeButton = styled.button`
 
     span {
         padding-bottom: 2px;
-        border-bottom: 1px solid ${props => (props.isActive ? '#20d35e' : `transparent`)};
+        border-bottom: 1px solid ${props => (props.isActive ? '#f0f0f0' : `transparent`)};
         line-height: 1.5;
         white-space: nowrap;
     }
