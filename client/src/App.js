@@ -27,7 +27,7 @@ class App extends Component  {
                 style={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1}}
                 transition={{ ease: "easeOut", duration: 0.25, delay: 1}}>
-                    <motion.a className="logo" href="https://statify.com/" target="_blank" rel="noopener noreferrer"
+                    <motion.a className="logo" href="https://spotify.com" target="_blank" rel="noopener noreferrer"
                     style={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1}}
                     transition={{ ease: "easeOut", duration: 0.25, delay: 1.5}}>
