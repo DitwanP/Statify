@@ -8,7 +8,7 @@ const { colors} = theme;
 const LOGIN_URI =
     process.env.NODE_ENV !== 'production'
         ? 'http://localhost:8888/login'
-        : 'https://statify.herokuapp.com/login';
+        : 'https://statify-me.herokuapp.com/login';
 
 const Login = styled(Main)`
     ${mixins.flexCenter};
