@@ -60,10 +60,10 @@ if (cluster.isMaster) {
   const app = express();
 
   // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, '../build')));
+  app.use(express.static(path.resolve(__dirname, './client/build')));
 
   app
-    .use(express.static(path.resolve(__dirname, '../build')))
+    .use(express.static(path.resolve(__dirname, './client/build')))
     .use(cors())
     .use(cookieParser())
     .use(history({
@@ -75,10 +75,10 @@ if (cluster.isMaster) {
         ],
       }),
     )
-    .use(express.static(path.resolve(__dirname, '../build')));
+    .use(express.static(path.resolve(__dirname, './client/build')));
 
   app.get('/', function (req, res) {
-    res.render(path.resolve(__dirname, '../build/index.html'));
+    res.render(path.resolve(__dirname, './client/build/index.html'));
   });
 
   app.get('/login', function (req, res) {
