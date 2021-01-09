@@ -23,8 +23,8 @@
     "client": "cd client && npm start",
     "server": "node server",
     "dev": "concurrently --kill-others-on-fail \"npm run-script server\" \"npm run-script client\"",
-    "start": "npm install && node server",
-    "heroku-postbuild": "cd client/ && npm install && npm run-script build"
+    "start": "node server",
+    "heroku-postbuild": "npm install && cd client/ && npm install && npm run-script build"
   },
   "dependencies": {
     "connect-history-api-fallback": "^1.6.0",
