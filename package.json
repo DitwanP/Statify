@@ -22,8 +22,18 @@
     "client:install": "cd client && npm install",
     "client": "cd client && npm start",
     "server": "node server",
-    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\"",
-    "start": "node server",
+    "dev": "concurrently --kill-others-on-fail \"npm run-script server\" \"npm run-script client\"",
+    "start": "npm install && node server",
     "heroku-postbuild": "cd client/ && npm install && npm run-script build"
+  },
+  "dependencies": {
+    "connect-history-api-fallback": "^1.6.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "querystring": "^0.2.0",
+    "request": "^2.88.2"
   }
+
 }
