@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+// COLORS
+$white:#f0f0f0;
+$white-active:#ffffff;
+$light-grey:#999999;
+$nav:#030303;
+$spotify-green:#1DB954;
+$spotify-green-dark:#15803a;
+$spotify-green-brighter:#20d35e;
+$spotify-black:#1b1b1b;
+
+// SCREEN SIZES
+$desktop:1200px;
+$laptop:1024px;
+$tablet:960px;
+$small-tablet:650px;
+$phone:480px;
+
+.background {
+    height: 100%;
+    width: 100%;
+    background-color: $spotify-black;
+    overflow: hidden;
+}
+
+.recents {
+    height: 100%;
+    width: 100%;
+    max-width: 1400px;
+    padding: 70px;
+    padding-bottom: 0px;
+    color: $white;
+    background: $spotify-black;
+    font-family: 'Barlow', sans-serif;
+    margin: 0px auto;
+
+    .header-container-recents {
+        width: 100%;
+        height: 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-top: 4rem;
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 500;
+        }
+
+        @media screen and (max-width:1000px) {
+            h1 {
+                font-size: 1.6rem;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .users-recents-container {
+        width: 100%;
+        height: 100%;
+        margin-top: 30px;
+
+        .song-item {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            .song-album-art {
+                margin-right: 2rem;
+
+                img {
+                    height: 64px;
+                    width: 64px;
+                }
+
+                :hover {
+                    border: 2px solid $spotify-green;
+                }
+            }
+
+            .song-and-artist {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow: hidden;
+
+                .song-name {
+                    text-decoration: none;
+                    color: $white;
+
+                    h1 {
+                        font-size: 1.6rem;
+                        font-weight: 500;
+                    }
+
+                    :hover {
+                        color: $spotify-green-brighter;
+                        text-decoration: underline;
+                    }
+
+                    a {
+                        text-decoration: none;
+                    }                       
+                }
+
+                .artists-and-album {
+                    display: flex;
+
+                    .artists {
+                        display: flex;
+                        flex-direction: row;
+
+                        h2 {
+                            font-size: 1.4rem;
+                            font-weight: 400;
+                            color: $light-grey;
+                            margin-right: 0.5rem;
+
+                            a {
+                                text-decoration: none;
+                                color: $light-grey;
+                            }   
+                            
+                            :hover {
+                                color: $white-active;
+                                text-decoration: underline;
+                            }
+                        }
+    
+                        ::after {
+                            content: ",";
+                        }
+    
+                        :last-child::after {
+                            content: "";
+                        }
+                    }
+
+                    .album {
+                        display: flex;
+                        padding-right: 1px;
+                        white-space: nowrap;
+
+                        span {
+                            margin-right: 0.5rem;
+                            font-size: 1.2rem;
+                            color: $light-grey;
+                        }
+
+                        h2 {
+                            font-size: 1.4rem;
+                            font-weight: 400;
+                            overflow: hidden;
+                            padding-right: 1px;
+                            text-overflow: ellipsis;
+
+                            a {
+                                text-decoration: none;
+                                color: $light-grey;
+                            }   
+                            
+                            :hover {
+                                color: $white-active;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .last-played {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: auto;
+
+                .header {
+                    display: flex;
+                    justify-content: center;
+                    h1 {
+                        font-size: 1.4rem;
+                        font-weight: 500;
+                    }
+                }
+
+                .date {
+                    display: flex;
+                    justify-content: center;
+                    time {
+                        font-size: 1.6rem;
+                        color: $light-grey;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and(max-width:1000px) {
+        max-width: 700px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    @media screen and (max-width:$small-tablet) {
+        max-width: 500px;
+    }
+
+    @media screen and (max-width:$phone) {
+        max-width: 400px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .users-recents-container {
+            .song-item {
+                .song-album-art {
+                    margin-right: 1rem;
+    
+                    img {
+                        height: 58px;
+                        width: 58px;
+                    }
+                }
+
+                .song-and-artist {
+                    .song-name {
+                        h1 {
+                            font-size: 1.3rem;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .artists-and-album {
+                        .artists {
+                            h2 {
+                                font-size: 1.2rem;
+                                margin-right: 0.5rem;
+                            }
+                        }
+
+                        .album {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+
+                            span {
+                                margin-right: 0.5rem;
+                            }
+
+                            h2 {
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+                }
+
+                .last-played {
+                    display: none;
+                }
+            }
+        }
+    }
+}
