@@ -1,5 +1,5 @@
 # Statify
-> A page that allows you to view your unique spotify stats and data.
+> A web app that allows you to view your unique spotify stats and data.
 
 Built with:
 
