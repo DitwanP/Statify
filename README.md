@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/60022782/115463048-5cc0cd00-a1f9-11eb-9a0e-b3db974e04d3.png)
+
 # Statify
 > A simple and straight-forward web app that allows you to view some of your most relevant and unique spotify stats and data.
 >
